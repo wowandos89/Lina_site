@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лина Кеда — врач-оториноларинголог</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14282B;
+    --ink-soft:#3C5457;
+    --bg:#F6EEEC;
+    --bg-alt:#FBF7F5;
+    --white:#FFFFFF;
+    --rose:#C34F63;
+    --rose-deep:#9E3A4C;
+    --teal:#163C3F;
+    --teal-2:#1F5457;
+    --teal-tint:#E6EEED;
+    --gold:#C79A56;
+    --line:rgba(20,40,43,0.12);
+    --shadow:0 20px 50px -25px rgba(20,40,43,0.35);
+    --radius:20px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;cursor:pointer;background:none;border:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    font-family:'Manrope',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{content:"";width:16px;height:1px;background:var(--rose-deep);display:inline-block;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:15px 28px;border-radius:100px;font-weight:700;font-size:15px;
+    border:1px solid transparent;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--teal);color:var(--white);}
+  .btn-primary:hover{background:var(--rose-deep);transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(158,58,76,0.55);}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* NAV */
+  header.site{position:sticky;top:0;z-index:100;background:rgba(246,238,236,0.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:var(--maxw);margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-size:20px;font-weight:500;}
+  .brand .mark{width:34px;height:34px;flex-shrink:0;}
+  .brand .mark path{stroke:var(--rose-deep);}
+  .nav-links{display:flex;align-items:center;gap:34px;font-weight:600;font-size:14.5px;}
+  .nav-links a{color:var(--ink-soft);transition:color .2s;}
+  .nav-links a:hover{color:var(--rose-deep);}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .burger{display:none;padding:6px;}
+  .burger span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0;transition:.3s;}
+
+  /* HERO */
+  .hero{padding:76px 0 40px;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:center;}
+  .hero-photo-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+  .hero-photo{
+    width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;
+    border:6px solid var(--white);box-shadow:var(--shadow);position:relative;z-index:2;
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover;}
+  .hero-ring{position:absolute;border:1px solid var(--line);border-radius:50%;z-index:1;}
+  .hr1{width:112%;height:112%;top:-6%;left:-6%;}
+  .hr-spiral{position:absolute;width:46%;top:-8%;right:-10%;z-index:1;opacity:.9;}
+  .hr-spiral path{fill:none;stroke:var(--rose);stroke-width:1.4;stroke-linecap:round;}
+  .hero h1{font-size:clamp(34px,4.4vw,52px);line-height:1.08;margin-top:16px;}
+  .hero .role{margin-top:10px;font-size:19px;color:var(--ink-soft);font-family:'Fraunces',serif;font-style:italic;}
+  .hero-sub{margin-top:22px;font-size:16.5px;color:var(--ink-soft);max-width:48ch;}
+  .hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px;}
+  .chip{background:var(--white);border:1px solid var(--line);padding:9px 16px;border-radius:100px;font-size:13.5px;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:7px;}
+  .chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--rose);}
+
+  section{padding:90px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .section-head h2{font-size:clamp(28px,3.2vw,38px);margin-top:14px;line-height:1.14;}
+  .section-head p{margin-top:14px;color:var(--ink-soft);font-size:16px;}
+
+  /* ABOUT ACCORDION */
+  .about{background:var(--bg-alt);}
+  .about-inner{max-width:760px;margin:0 auto;}
+  .acc-item{border-bottom:1px solid var(--line);}
+  .acc-item:first-child{border-top:1px solid var(--line);}
+  .acc-q{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 4px;cursor:pointer;}
+  .acc-q h3{font-size:19px;font-weight:400;}
+  .acc-plus{width:22px;height:22px;flex-shrink:0;position:relative;}
+  .acc-plus::before,.acc-plus::after{content:"";position:absolute;background:var(--rose-deep);top:50%;left:50%;transform:translate(-50%,-50%);transition:.3s;}
+  .acc-plus::before{width:14px;height:2px;}
+  .acc-plus::after{width:2px;height:14px;}
+  .acc-item.open .acc-plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0;}
+  .acc-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .acc-a-inner{padding:0 4px 26px;color:var(--ink-soft);font-size:15.5px;max-width:64ch;}
+  .acc-a-inner .todo{
+    background:var(--teal-tint);border:1px dashed var(--teal-2);border-radius:12px;
+    padding:14px 16px;font-size:13.5px;color:var(--teal-2);font-weight:600;
+  }
+
+  /* CONSULTATIONS */
+  .price-list{border-top:1px solid var(--line);margin-top:8px;}
+  .price-row{display:flex;align-items:baseline;gap:14px;padding:16px 0;border-bottom:1px dashed var(--line);}
+  .price-row .name{font-size:15.5px;font-weight:600;}
+  .price-row .fill{flex-grow:1;border-bottom:1px dotted var(--line);transform:translateY(-4px);}
+  .price-row .amount{font-family:'Fraunces',serif;font-size:18px;white-space:nowrap;color:var(--teal);}
+
+  .consult-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:34px;display:flex;flex-direction:column;gap:20px;
+  }
+  .consult-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+  .consult-card h3{font-size:22px;}
+  .clinic-box{
+    background:var(--teal-tint);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--teal-2);font-weight:600;line-height:1.6;
+  }
+  .consult-note{font-size:14.5px;color:var(--ink-soft);line-height:1.65;}
+  .consult-note + .consult-note{margin-top:4px;}
+
+  .legal-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;}
+  .legal-btn{
+    flex:1 1 220px;
+    display:flex;flex-direction:column;gap:3px;align-items:flex-start;
+    background:var(--white);border:1px solid var(--line);border-radius:16px;
+    padding:16px 20px;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .legal-btn:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--teal);}
+  .legal-btn .lbl{font-weight:700;font-size:14px;color:var(--ink);display:flex;align-items:center;gap:8px;}
+  .legal-btn .sub{font-size:12.5px;color:var(--ink-soft);}
+  .legal-btn .lbl svg{width:16px;height:16px;flex-shrink:0;}
+  .legal-btn .lbl svg path{stroke:var(--rose-deep);}
+
+  .reviews-cta{
+    margin-top:20px;
+    background:linear-gradient(135deg,var(--teal-2),var(--teal));
+    color:var(--white);border-radius:16px;padding:22px 26px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  }
+  .reviews-cta .t{font-family:'Fraunces',serif;font-size:19px;}
+  .reviews-cta .s{font-size:13.5px;color:rgba(251,247,245,0.75);margin-top:4px;}
+
+  /* SOCIAL */
+  .social{background:var(--bg-alt);}
+  .social-inner{max-width:640px;margin:0 auto;}
+  .social-row{display:flex;flex-direction:column;gap:14px;margin-top:30px;}
+  .social-btn{
+    display:flex;align-items:center;gap:14px;padding:18px 22px;border-radius:16px;
+    font-weight:700;font-size:15px;color:var(--white);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .social-btn:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+  .social-btn.tg{background:#4E9BD8;}
+  .social-btn.ig{background:var(--ink);}
+  .social-btn svg{width:22px;height:22px;flex-shrink:0;}
+  .social-note{margin-top:14px;font-size:12.5px;color:var(--ink-soft);}
+
+  /* FOOTER */
+  footer{padding:60px 0 36px;}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;padding-top:26px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft);flex-wrap:wrap;gap:12px;}
+  .foot-brand{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-size:19px;margin-bottom:26px;}
+  .foot-brand .mark{width:30px;height:30px;}
+  .foot-brand .mark path{stroke:var(--rose-deep);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-photo-wrap{max-width:280px;margin:0 auto;}
+    .consult-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:680px){
+    .wrap{padding:0 20px;}
+    .nav{padding:16px 20px;}
+    .nav-links{position:fixed;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;align-items:flex-start;padding:24px 20px;gap:18px;border-bottom:1px solid var(--line);transform:translateY(-130%);opacity:0;transition:.3s;pointer-events:none;}
+    .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+    .nav-cta .btn-ghost{display:none;}
+    .burger{display:block;}
+    section{padding:64px 0;}
+    .price-row{flex-wrap:wrap;}
+    .price-row .fill{display:none;}
+    .legal-btn{flex:1 1 100%;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a href="#" class="brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none"><path d="M20 8 C 26 8 30 13 28 19 C 26.5 23.5 21.5 25 18.5 22 C 16.3 19.7 17.2 16.4 19.8 15.7 C 21.6 15.2 23 16.5 22.6 18" stroke-width="1.6" stroke-linecap="round"/></svg>
+      Лина Кеда
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">Обо мне</a>
+      <a href="#consultations">Консультации</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#social">Соцсети</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#social" class="btn btn-ghost">Соцсети</a>
+      <a href="#consultations" class="btn btn-primary">Записаться</a>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-photo-wrap reveal">
+      <div class="hero-ring hr1"></div>
+      <svg class="hr-spiral" viewBox="0 0 200 200" id="heroSpiral"></svg>
+      <div class="hero-photo">
+        <img src="assets/lina.jpg" alt="Лина Кеда, врач-оториноларинголог">
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow">ЛОР-врач · Автор блога</span>
+      <h1>Лина Кеда</h1>
+      <p class="role">врач-оториноларинголог для взрослых и детей</p>
+      <p class="hero-sub">Очный и онлайн приём. Ниже — как я могу вам помочь, как записаться на приём и стоимость консультации.</p>
+      <div class="hero-cta">
+        <a href="#consultations" class="btn btn-primary">Записаться на приём</a>
+        <a href="#reviews" class="btn btn-ghost">Смотреть отзывы →</a>
+      </div>
+      <div class="chips">
+        <span class="chip">Очный приём</span>
+        <span class="chip">Онлайн-консультации</span>
+        <span class="chip">Дети и взрослые</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-inner">
+    <div class="section-head reveal" style="margin-bottom:26px;">
+      <span class="eyebrow">Обо мне</span>
+      <h2>Коротко о практике</h2>
+    </div>
+    <div class="acc-item open reveal">
+      <div class="acc-q" data-acc>
+        <h3>Мой путь в медицине</h3>
+        <span class="acc-plus"></span>
+      </div>
+      <div class="acc-a"><div class="acc-a-inner">
+        <p style="font-weight:700;color:var(--ink);margin-bottom:6px;">Образование</p>
+        <p style="margin-bottom:6px;">2016 — ФГАОУ ВО Первый Московский Государственный Медицинский Университет имени И.М. Сеченова Минздрава России (Сеченовский Университет) по специальности «Лечебное дело», диплом с отличием</p>
+        <p style="margin-bottom:6px;">2016–2018 — клиническая ординатура на базе кафедры болезней уха, горла и носа лечебного факультета ФГАОУ ВО Первый МГМУ имени И.М. Сеченова Минздрава России (Сеченовский Университет)</p>
+        <p style="margin-bottom:6px;">2018 — первичная переподготовка по специальности «Сурдология-оториноларингология» на базе кафедры сурдологии Российской Медицинской Академии Непрерывного Профессионального Образования (РМАНПО)</p>
+        <p style="margin-bottom:18px;">2018–2023 — аспирантура на базе кафедры болезней уха, горла и носа лечебного факультета ФГАОУ ВО Первый МГМУ имени И.М. Сеченова Минздрава России (Сеченовский Университет)</p>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:6px;">Опыт работы</p>
+        <p style="margin-bottom:6px;">2018–2019 — ООО «ДокторЛор», врач-оториноларинголог</p>
+        <p style="margin-bottom:6px;">2018 — Красногорская Городская Больница №2, поликлиническое отделение для взрослого населения, врач-оториноларинголог</p>
+        <p style="margin-bottom:6px;">2018–2019 — Первый МГМУ им. И. М. Сеченова, кафедра болезней уха, горла и носа, старший лаборант</p>
+        <p style="margin-bottom:6px;">2019–2021 — ООО «Лечебный центр», отделение хирургии, врач-оториноларинголог</p>
+        <p style="margin-bottom:6px;">2022–2025 — Клиника Чайка, врач-оториноларинголог</p>
+        <p style="margin-bottom:6px;">2025 — руководитель практики оториноларингологии в клинике Чайка Белые Сады</p>
+        <p style="margin-bottom:6px;">2025–2026 — врач-оториноларинголог, руководитель ЛОР-направления в клинике «Наше Время»</p>
+        <p>2026 — н.в. — врач-оториноларинголог, руководитель ЛОР-направления в клинике «Маяк»</p>
+      </div></div>
+    </div>
+    <div class="acc-item reveal">
+      <div class="acc-q" data-acc>
+        <h3>Проблемы, с которыми я работаю</h3>
+        <span class="acc-plus"></span>
+      </div>
+      <div class="acc-a"><div class="acc-a-inner">
+        <div style="display:flex;flex-wrap:wrap;gap:9px;">
+          <span class="chip" style="background:var(--bg-alt);">Затруднение носового дыхания</span>
+          <span class="chip" style="background:var(--bg-alt);">Заложенность носа</span>
+          <span class="chip" style="background:var(--bg-alt);">Выделения из носа</span>
+          <span class="chip" style="background:var(--bg-alt);">Стекание слизи по задней стенке глотки</span>
+          <span class="chip" style="background:var(--bg-alt);">Проблемы с обонянием</span>
+          <span class="chip" style="background:var(--bg-alt);">Боль в ушах</span>
+          <span class="chip" style="background:var(--bg-alt);">Заложенность ушей</span>
+          <span class="chip" style="background:var(--bg-alt);">Снижение слуха</span>
+          <span class="chip" style="background:var(--bg-alt);">Выделения из ушей</span>
+          <span class="chip" style="background:var(--bg-alt);">Боль в горле</span>
+          <span class="chip" style="background:var(--bg-alt);">Инородное тело в горле, ушах или в носу</span>
+          <span class="chip" style="background:var(--bg-alt);">Осиплость</span>
+          <span class="chip" style="background:var(--bg-alt);">Храп</span>
+          <span class="chip" style="background:var(--bg-alt);">Зависимость от сосудосуживающих капель</span>
+          <span class="chip" style="background:var(--bg-alt);">Першение в горле</span>
+          <span class="chip" style="background:var(--bg-alt);">Сухость в носу</span>
+          <span class="chip" style="background:var(--bg-alt);">Воспаление в околоносовой пазухе из-за больного зуба</span>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="consultations">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Консультации</span>
+      <h2>Стоимость приёма</h2>
+    </div>
+
+    <div class="price-list reveal">
+      <div class="price-row">
+        <span class="name">Очный приём с эндоскопией ЛОР-органов (первичный)</span>
+        <span class="fill"></span>
+        <span class="amount">7 000 ₽</span>
+      </div>
+      <div class="price-row">
+        <span class="name">Очный приём (повторный)</span>
+        <span class="fill"></span>
+        <span class="amount">6 500 ₽</span>
+      </div>
+      <div class="price-row">
+        <span class="name">Онлайн-консультация</span>
+        <span class="fill"></span>
+        <span class="amount">4 000 ₽</span>
+      </div>
+      <div class="price-row">
+        <span class="name">Онлайн-консультация + сопровождение в чате 3 дня</span>
+        <span class="fill"></span>
+        <span class="amount">5 000 ₽</span>
+      </div>
+    </div>
+
+    <div class="consult-grid" style="margin-top:36px;">
+      <div class="consult-card reveal">
+        <h3>Очный приём</h3>
+        <div class="clinic-box">
+          Клиника «Маяк»<br>
+          Москва, Проспект Мира 102с23<br>
+          м. Алексеевская, Рижская
+        </div>
+        <a href="https://mayakclinic.ru/specialists/41" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;">Запись на очный приём</a>
+      </div>
+      <div class="consult-card reveal">
+        <h3>Онлайн-консультация</h3>
+        <p class="consult-note">Проводится в формате чата, видео- или аудиозвонка. Длительность консультации 30 минут. После консультации мы с вами фиксируем план действий по вашему запросу.</p>
+        <p class="consult-note">При онлайн-сопровождении по болезни в стоимость входит онлайн-консультация + общение в чате в течение 3 дней, включая день консультации. Это удобно, если нужно посмотреть результаты анализов или фотографии с ушной камеры в динамике.</p>
+        <a href="https://t.me/kedalina" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%;">Запись на онлайн-консультацию</a>
+      </div>
+    </div>
+
+    <div class="legal-row reveal">
+      <a href="assets/oferta.pdf" download="Договор-оферта.pdf" class="legal-btn">
+        <span class="lbl"><svg viewBox="0 0 20 20" fill="none"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Договор-оферта</span>
+        <span class="sub">Оплачивая онлайн-консультацию, вы соглашаетесь с договором-офертой</span>
+      </a>
+      <a href="assets/policy.pdf" download="Политика обработки персональных данных.pdf" class="legal-btn">
+        <span class="lbl"><svg viewBox="0 0 20 20" fill="none"><path d="M10 2l6 3v5c0 4.5-2.6 7-6 8-3.4-1-6-3.5-6-8V5l6-3z" stroke-width="1.5" stroke-linejoin="round"/></svg>Политика обработки персональных данных</span>
+        <span class="sub">Условия обработки данных пациентов</span>
+      </a>
+      <a href="assets/consent.pdf" download="Согласие на обработку персональных данных.pdf" class="legal-btn">
+        <span class="lbl"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Согласие на обработку персональных данных</span>
+        <span class="sub">Форма согласия для записи на приём</span>
+      </a>
+    </div>
+
+    <div class="reviews-cta reveal" id="reviews">
+      <div>
+        <div class="t">Отзывы пациентов</div>
+        <div class="s">Здесь вы можете посмотреть отзывы о моей работе</div>
+      </div>
+      <a href="https://prodoctorov.ru/moskva/vrach/1358934-keda/" target="_blank" rel="noopener" class="btn" style="background:var(--white);color:var(--teal);">Смотреть отзывы</a>
+    </div>
+  </div>
+</section>
+
+<section class="social" id="social">
+  <div class="wrap social-inner">
+    <div class="section-head reveal" style="margin:0 auto 0;text-align:center;">
+      <span class="eyebrow" style="justify-content:center;">Мои соцсети</span>
+      <h2>Оставайтесь на связи</h2>
+    </div>
+    <div class="social-row reveal">
+      <a href="https://t.me/nosi_ushi" target="_blank" rel="noopener" class="social-btn tg">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M21 4L2.5 11.5c-1 .4-1 1.6.1 1.9l4.8 1.5 1.8 5.6c.3.9 1.5 1.1 2.1.4l2.6-3 5 3.7c.8.6 2 .2 2.2-.8l3-16.8c.2-1.1-.9-2-2.1-1.5z" fill="white"/></svg>
+        Телеграм-канал
+      </a>
+      <a href="https://instagram.com/dr.linakeda/" target="_blank" rel="noopener" class="social-btn ig">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.5"/><path d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9z" stroke="white" stroke-width="1.5"/></svg>
+        Мой Инстаграм*
+      </a>
+    </div>
+    <p class="social-note">*Meta Platforms Inc. признана экстремистской и запрещена в РФ</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="#" class="foot-brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none"><path d="M20 8 C 26 8 30 13 28 19 C 26.5 23.5 21.5 25 18.5 22 C 16.3 19.7 17.2 16.4 19.8 15.7 C 21.6 15.2 23 16.5 22.6 18" stroke-width="1.6" stroke-linecap="round"/></svg>
+      Лина Кеда
+    </a>
+    <div class="foot-inner">
+      <span>© 2026 Лина Кеда. Врач-оториноларинголог.</span>
+      <span>Очный и онлайн приём</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  document.querySelectorAll('[data-acc]').forEach(q => {
+    const item = q.closest('.acc-item');
+    const a = item.querySelector('.acc-a');
+    if(item.classList.contains('open')){ a.style.maxHeight = a.scrollHeight + 'px'; }
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.acc-a').style.maxHeight = 0; });
+      if(!isOpen){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  function buildSpiral(svgId, turns){
+    const svg = document.getElementById(svgId);
+    if(!svg) return;
+    const cx=100, cy=100;
+    let d1 = "";
+    const points = 200;
+    for(let i=0;i<=points;i++){
+      const t = i/points * turns * Math.PI*2;
+      const r = 3 * Math.exp(0.16*t);
+      const x = cx + r*Math.cos(t);
+      const y = cy + r*Math.sin(t);
+      d1 += (i===0?"M":"L") + x.toFixed(1) + "," + y.toFixed(1) + " ";
+    }
+    const path1 = document.createElementNS("http://www.w3.org/2000/svg","path");
+    path1.setAttribute("d", d1);
+    svg.appendChild(path1);
+    const len = path1.getTotalLength();
+    path1.style.strokeDasharray = len;
+    path1.style.strokeDashoffset = len;
+    path1.animate([{strokeDashoffset:len},{strokeDashoffset:0}], {duration:1800, delay:150, easing:'ease-out', fill:'forwards'});
+  }
+  buildSpiral('heroSpiral', 3);
+</script>
+
+</body>
+</html>
